@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour {
         //}
     }
 
-    void OnTriggerEnter2D(Collider2D triggerCollider) {
+    void OnTriggerEnter2D(Collider2D triggerCollider) { // On TriggerEnter (The Falling Block is set to trigger) - Destory the player
         if (triggerCollider.tag == "Falling Block") {
             Destroy(gameObject);
         }     

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Spawner : MonoBehaviour {
 
     public GameObject fallingBlockPrefab; // Reference to the Falling Block prefab in Inspector
-    public float secondsBetweenSpawns = 1f; // Seconds between Falling Blocs spawns
+    public Vector2 secondsBetweenSpawnsMinMax; // Variable for seconds between spawns based on the difficulty % - editable in Inspector.
     float nextSpawnTime; // Spawn time after the the previous spawn time has finished
 
     public Vector2 spawnSizeMinMax; // Declaring variable for the min and max size the blocks can be - editable in Inspector.
@@ -21,6 +21,7 @@ public class Spawner : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (Time.time > nextSpawnTime) { // If the current time in the game is greater than the next spawn time we're ready to spawn the next object
+            float secondsBetweenSpawns = Mathf.Lerp(secondsBetweenSpawnsMinMax.y, secondsBetweenSpawnsMinMax.x, Difficulty.GetDifficultyPercent()); // Linearly interpolates between max and min spawn size by the difficulty % - To decrease the time between spawns make it more diffcilut over time.
             nextSpawnTime = Time.time + secondsBetweenSpawns; // Once we pass the spawn time, the spawn time gets increased by the amount of time we want between the spawns 
 
             float spawnAngle = Random.Range(-spawnAngleMax, spawnAngleMax);
