@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     public float speed = 7f;
+    public event System.Action OnPlayerDeath; // Creating event for when the game is over
+
     float screenHalfWidthInWorldUnits;
 
 	// Use this for initialization
@@ -39,9 +41,12 @@ public class PlayerController : MonoBehaviour {
         //}
     }
 
-    void OnTriggerEnter2D(Collider2D triggerCollider) { // On TriggerEnter (The Falling Block is set to trigger) - Destory the player
-        if (triggerCollider.tag == "Falling Block") {
-            Destroy(gameObject);
+    void OnTriggerEnter2D(Collider2D triggerCollider) { // Method for destorying the player
+        if (triggerCollider.tag == "Falling Block") { // If the trigger has tag "Falling Block"
+            if (OnPlayerDeath != null) { // and OnPlayerDeath is not null
+                OnPlayerDeath(); // Call OnPlayerDeath event
+            }
+            Destroy(gameObject); // Destroy the player
         }     
     }
 }

@@ -8,7 +8,7 @@ public static class Difficulty { // This class file is not attached to any objec
 
     public static float GetDifficultyPercent() { // Returuns the current difficluty
         //return 1; // Returns the max difficulty instantly
-        return Mathf.Clamp01(Time.time / secondsToMaxDifficulty); // Current time / secondsToMaxDifficulty restricted between 0 and 1
+        return Mathf.Clamp01(Time.timeSinceLevelLoad / secondsToMaxDifficulty); // Current time / secondsToMaxDifficulty restricted between 0 and 1
     }
 
 }
